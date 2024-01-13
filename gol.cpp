@@ -13,7 +13,6 @@ int main(int argc, char* argv[])
     case ss::FAIL_CREATE_COMPONENT:
     case ss::FAIL_CREATE_WIN:
     case ss::FAIL_CREATE_REND:
-    case ss::FAIL_UNKNOWN:
         delete eng;
         return r;
     default:
@@ -25,5 +24,5 @@ int main(int argc, char* argv[])
 
     delete eng;
 
-    return 0;
+    return ss::OK;
 }

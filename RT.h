@@ -8,7 +8,7 @@ namespace ss
 	constexpr auto FAIL_UNKNOWN =		-2;
 
 	//	100s - ENGINE return codes
-	constexpr auto QUIT_LOOP =			101;
+	constexpr auto EXIT_LOOP =			101;
 	constexpr auto FAIL_CREATE_COMPONENT = 102;
 
 	//	200s - VIEW return codes

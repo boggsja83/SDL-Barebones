@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GameInputContext.h" />
+    <ClInclude Include="ICMap.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="RT.h" />
     <ClInclude Include="Settings.h" />

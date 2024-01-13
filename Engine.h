@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "View.h"
 #include "Input.h"
+#include "ICMap.h"
 
 namespace ss
 {
@@ -22,7 +23,8 @@ namespace ss
         //int     _ErrorCode; // cant be specific easily...
 
         int     loop();
-        int     input_to_context();
+        int     input_to_context(int *);
+        int     update(int*,int);
 
     public:
         Engine(Engine const& _eng)
@@ -46,7 +48,8 @@ namespace ss
 
         inline int      start() { _On = true; return loop(); }
         inline void     stop() { _On = false; }
-        inline void     log(const char* _c) { std::cout << _c; }
+        inline void     log(char const *_c) { std::cout << _c; }
 
 	};
 }
+
