@@ -24,7 +24,7 @@ namespace ss
 
         int     loop();
         int     input_to_context(int *);
-        int     update(int*);
+        int     update(int*,int);
 
     public:
         Engine(Engine const& _eng)

@@ -32,7 +32,7 @@ int ss::Engine::loop(){
 		
 		r = input_to_context(clst);
 		
-		//update();
+		r = update(clst,r);
 		//render();
 	}
 
@@ -56,8 +56,12 @@ int ss::Engine::input_to_context(int *_c){
 	return tsz;
 }
 
-int ss::Engine::update(int* _c)
+int ss::Engine::update(int* _c, int _sz)
 {
+	std::cout << _sz << " context return count ";
+	for (int i = 0; i < _sz; ++i) {
+		
+	}
 
 	return OK;
 }
