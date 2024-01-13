@@ -1,8 +1,7 @@
 #include "Engine.h"
 
-int ss::Engine::init()
-{
-	int r = INIT;
+int ss::Engine::init(){
+	auto r = INIT;
 	
 	_On = false;
 
@@ -23,17 +22,16 @@ int ss::Engine::init()
 	return OK;
 }
 
-int ss::Engine::loop()
-{
-	int r = INIT;
+int ss::Engine::loop(){
+	auto	r = INIT;
+	int		clst[CONTEXT_OPERATIONS_COUNT];
 
-	while(_On)
-	{
+	while(_On){
 		r = _Input->set_keys_state();
-		if (r == QUIT_LOOP) { stop(); }
+		if (r == EXIT_LOOP) { stop(); }
 		
-		r = input_to_context();
-
+		r = input_to_context(clst);
+		
 		//update();
 		//render();
 	}
@@ -41,9 +39,25 @@ int ss::Engine::loop()
 	return OK;
 }
 
-int ss::Engine::input_to_context()
-{
+//	_c requires an empty array sized CONTEXT_OPERATIONS_COUNT
+//	function returns number of _c entries; capacity is unchanged
+int ss::Engine::input_to_context(int *_c){
+	SDL_KeyboardEvent*	keys	= _Input->_Keys;
+	int*				context = _Game->_Context;
 
+	SDL_KeyboardEvent	tk;
+	auto				tsz = 0;
+
+	for (auto i = 0; i < CONTEXT_OPERATIONS_COUNT; ++i)	{
+		tk = keys[context[i]];
+		if (tk.state == SDL_PRESSED)_c[tsz++] = context[i];
+	}
+
+	return tsz;
+}
+
+int ss::Engine::update(int* _c)
+{
 
 	return OK;
 }

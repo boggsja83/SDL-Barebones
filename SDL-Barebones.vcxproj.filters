@@ -51,6 +51,9 @@
     <ClInclude Include="GameInputContext.h">
       <Filter>Source Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="ICMap.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">

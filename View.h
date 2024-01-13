@@ -8,28 +8,32 @@ namespace ss
 	class View
 	{
 	private:
-		int		winWidth,
-				winHeight;
+		int		_WinWidth,
+				_WinHeight;
 
-		SDL_Window*		winMain;
-		SDL_Renderer*	renMain;
+		SDL_Window*		_WinMain;
+		SDL_Renderer*	_RenMain;
+
+		
 
 	public:
-		View():winWidth(0),winHeight(0),winMain(nullptr),renMain(nullptr) {}
+		View():_WinWidth(0),_WinHeight(0),_WinMain(nullptr),_RenMain(nullptr) {}
 		View(View const &_v)
 		{
-			this->winWidth = _v.winWidth;
-			this->winHeight = _v.winHeight;
-			this->winMain = _v.winMain;
-			this->renMain = _v.renMain;
+			this->_WinWidth = _v._WinWidth;
+			this->_WinHeight = _v._WinHeight;
+			this->_WinMain = _v._WinMain;
+			this->_RenMain = _v._RenMain;
 		}
 		~View()
 		{
-			SDL_DestroyRenderer(renMain);
-			SDL_DestroyWindow(winMain);
-			SDL_Quit();
+			SDL_DestroyRenderer(_RenMain);
+			SDL_DestroyWindow(_WinMain);
 		}
 
 		int init();
+		inline SDL_Window* win() { return _WinMain; }
+		inline SDL_Renderer* ren() { return _RenMain; }
+
 	};
 }
