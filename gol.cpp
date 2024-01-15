@@ -8,21 +8,18 @@ int main(int argc, char* argv[])
     switch (r)
     {
     case ss::OK:
-        eng->start();
+        r = eng->start();
         break;
     case ss::FAIL_CREATE_COMPONENT:
     case ss::FAIL_CREATE_WIN:
     case ss::FAIL_CREATE_REND:
-        delete eng;
-        return r;
+        break;
     default:
-        delete eng;
-        return ss::FAIL_UNKNOWN;
+        r = ss::FAIL_UNKNOWN;
     }
-
-    //if (!r) { eng->start(); }
 
     delete eng;
 
-    return ss::OK;
+    std::cout << "r = ["<<r<<"]";
+    return r;
 }

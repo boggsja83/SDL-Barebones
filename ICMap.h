@@ -8,11 +8,11 @@ namespace ss{
 	public:
 		ICMap(): _Map() {}
 		ICMap(ICMap const& _m){
-			for (int i = 0; i < KEYS_COUNT; ++i) { this->_Map[i] = _m._Map[i]; }
+			for (int i = 0; i < KEY_COUNT; ++i) { this->_Map[i] = _m._Map[i]; }
 		}
 		~ICMap() {}
 
-		int		_Map[KEYS_COUNT];
+		int		_Map[KEY_COUNT];
 	};
 
 }
