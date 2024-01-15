@@ -4,7 +4,6 @@ namespace ss
 {
 	//	GENERAL return codes
 	constexpr auto OK =					0;
-	constexpr auto INIT =				-1;
 	constexpr auto FAIL_UNKNOWN =		-2;
 
 	//	100s - ENGINE return codes

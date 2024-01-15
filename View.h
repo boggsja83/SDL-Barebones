@@ -13,27 +13,29 @@ namespace ss
 
 		SDL_Window*		_WinMain;
 		SDL_Renderer*	_RenMain;
+		SDL_Rect		_Interface[9];
 
 		
 
 	public:
-		View():_WinWidth(0),_WinHeight(0),_WinMain(nullptr),_RenMain(nullptr) {}
-		View(View const &_v)
-		{
-			this->_WinWidth = _v._WinWidth;
-			this->_WinHeight = _v._WinHeight;
-			this->_WinMain = _v._WinMain;
-			this->_RenMain = _v._RenMain;
-		}
+		View():_WinWidth(0),_WinHeight(0),_WinMain(nullptr),_RenMain(nullptr),_Interface() {}
+		View(View const& _v) { init_copy(_v); }
 		~View()
 		{
 			SDL_DestroyRenderer(_RenMain);
 			SDL_DestroyWindow(_WinMain);
 		}
 
-		int init();
-		inline SDL_Window* win() { return _WinMain; }
-		inline SDL_Renderer* ren() { return _RenMain; }
+		inline SDL_Window*		win() { return _WinMain; }
+		inline SDL_Renderer*	ren() { return _RenMain; }
+
+		int		init();
+		void	init_copy(View const& _v);
+		void	init_interface_rects();
+		int		draw_interface(SDL_Renderer*);
+
+		//int set_color_bg(SDL_Renderer*,int,int,int,int);
+		//int set_color_bg(SDL_Renderer*,SDL_Color);
 
 	};
 }

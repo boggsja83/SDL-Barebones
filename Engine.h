@@ -19,12 +19,10 @@ namespace ss
 
         bool    _On;
 
-        //bool    _ErrorFlag; // use this for things like loop(), where RT 
-        //int     _ErrorCode; // cant be specific easily...
-
         int     loop();
         int     input_to_context(int *);
-        int     update(int*,int);
+        int     update(int*);
+        int     render();
 
     public:
         Engine(Engine const& _eng)
@@ -49,6 +47,8 @@ namespace ss
         inline int      start() { _On = true; return loop(); }
         inline void     stop() { _On = false; }
         inline void     log(char const *_c) { std::cout << _c; }
+
+        int            random_int(int, int);
 
 	};
 }
