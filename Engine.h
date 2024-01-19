@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "View.h"
 #include "Input.h"
-#include "ICMap.h"
+//#include "ICMap.h"
 
 namespace ss
 {
@@ -31,8 +31,9 @@ namespace ss
             this->_View = _eng._View;
             this->_Input = _eng._Input;
             this->_On = _eng._On;
+            this->_FrameCount = _eng._FrameCount;
         }
-        Engine():_Game(nullptr),_View(nullptr),_Input(nullptr),_On(false){}
+        Engine():_Game(nullptr),_View(nullptr),_Input(nullptr),_On(false),_FrameCount(0){}
         ~Engine() 
         {
             delete _Game;
@@ -48,7 +49,8 @@ namespace ss
         inline void     stop() { _On = false; }
         inline void     log(char const *_c) { std::cout << _c; }
 
-        int            random_int(int, int);
+        //int            random_int(int, int);
+        int             _FrameCount;
 
 	};
 }
