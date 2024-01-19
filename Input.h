@@ -8,7 +8,6 @@ namespace ss
 	class Input
 	{
 	private:
-		
 
 	public:
 		Input() : _Keys() {}
@@ -17,7 +16,7 @@ namespace ss
 
 		int init();
 		int init_copy(Input const &_i);
-		int set_keys_state();
+		int poll_events();
 
 		SDL_KeyboardEvent	_Keys[SDL_NUM_SCANCODES];
 		

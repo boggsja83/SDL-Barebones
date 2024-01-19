@@ -20,15 +20,50 @@ int ss::Engine::init(){
 int ss::Engine::loop(){
 	auto	r = INIT;
 	int		clst[CONTEXT_OPERATIONS_COUNT];
+	int		w = 0, h = 0;
+	bool	pause = true;
 
 	while(_On){
-		r = _Input->set_keys_state();
-		if (r == EXIT_LOOP) stop();	//	handle system exit event [non-user]
-		
+		++_FrameCount;
+
+		r = _Input->poll_events();
+		switch (r){
+		case OK:
+			break;
+		case EXIT_LOOP:
+			stop();
+			break;
+		case RESIZE_WINDOW:
+			SDL_GetWindowSize(_View->win(), &w, &h);
+			_View->set_win_width(w);
+			_View->set_win_height(h);
+			_FrameCount = 0;
+			break;
+		default:
+			return r;
+		}
+
 		r = update(clst);
-		if (r == EXIT_LOOP) stop(); //	handle exit event [user]
+		switch (r) {
+		case OK:
+			break;
+		case EXIT_LOOP:
+			stop();
+			break;
+		case CURSOR_SELECT_CONTEXT:
+			_FrameCount = 0;
+			break;
+		default:
+			return r;
+		}
 
 		r = render();
+		switch (r) {
+		case OK:
+			break;
+		default:
+			return r;
+		}
 	}
 
 	return OK;
@@ -60,23 +95,24 @@ int ss::Engine::update(int* _c)
 }
 
 int ss::Engine::render(){
-	SDL_Renderer* tr = _View->ren();
-	auto r = INIT;
-	//	draw background
-	r = SDL_SetRenderDrawColor(tr, COLOR_BG_R, COLOR_BG_G, COLOR_BG_B, COLOR_BG_A);
-	r = SDL_RenderClear(tr);
-	
-	r = _View->draw_interface(tr);
+	SDL_Renderer*	_rd = _View->ren();
+	auto			r = INIT;
 
-	SDL_RenderPresent(tr);
+	if (_FrameCount == 1) {
+		r = SDL_SetRenderDrawColor(_rd, COLOR_BG_R, COLOR_BG_G, COLOR_BG_B, COLOR_BG_A);
+		if (r) return FAIL_SET_DRAW_COLOR;
 
+		r = SDL_RenderClear(_rd);
+		if (r) return FAIL_RENDER_CLEAR;
 
+		r = _View->draw_interface(_rd);
+		if (r) return r;
 
+		r = _View->draw_grid(_rd, 3, 3);
+		if (r) return r;
+	}
 
-	return OK;
-}
-
-int ss::Engine::random_int(int _lo, int _hi) {
+	SDL_RenderPresent(_rd);
 
 	return OK;
 }

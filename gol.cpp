@@ -1,13 +1,13 @@
 #include "Engine.h"
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
     ss::Engine* eng = new ss::Engine();
  
     auto r = eng->init();
     switch (r)
     {
-    case ss::OK:
+    case ss::OK: 
         r = eng->start();
         break;
     case ss::FAIL_CREATE_COMPONENT:

@@ -21,18 +21,16 @@ int ss::Game::update(int* _c,int _sz) {
 
 	for (int i = 0; i < _sz; ++i) {
 		r = process_input(_c[i]);
-		//	handle r
 		if (r == EXIT_LOOP) break;
 	}
 	
-
+	if (_sz == 0)return OK;
+	// currently, only returns r for last element in array.  TODO return array of r's??
 	return r;
 }
 
 int ss::Game::process_input(int _c) {
 	switch (_c) {
-	//case INPUT_NONE: input_none is not a context operation
-		//break;
 	case CURSOR_UP_CONTEXT:
 		std::cout << "CURSOR_UP\n";
 		break;
@@ -47,6 +45,7 @@ int ss::Game::process_input(int _c) {
 		break;
 	case CURSOR_SELECT_CONTEXT:
 		std::cout << "CURSOR_SELECT\n";
+		return CURSOR_SELECT_CONTEXT;
 		break;
 	case EXIT_GAME_CONTEXT:
 		std::cout << "EXIT_GAME\n";

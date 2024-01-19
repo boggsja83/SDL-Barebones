@@ -140,6 +140,7 @@
     <ClInclude Include="GameInputContext.h" />
     <ClInclude Include="ICMap.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="RandNum.h" />
     <ClInclude Include="RT.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="View.h" />

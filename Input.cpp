@@ -13,22 +13,29 @@ int ss::Input::init_copy(Input const& _i)
 	return OK;
 }
 
-int ss::Input::set_keys_state()
+int ss::Input::poll_events()
 {
 	SDL_Event ev;
 
-	while (SDL_PollEvent(&ev))
-	{
-		switch (ev.type)
-		{
+	while (SDL_PollEvent(&ev)){
+		switch (ev.type){
 		case SDL_KEYDOWN:
 			_Keys[ev.key.keysym.scancode] = ev.key;
 			break;
+		
 		case SDL_KEYUP:
 			_Keys[ev.key.keysym.scancode] = ev.key;
 			break;
+		
 		case SDL_QUIT:
 			return EXIT_LOOP;
+		
+		case SDL_WINDOWEVENT:
+			switch (ev.window.event) {
+			case SDL_WINDOWEVENT_SIZE_CHANGED:
+				return RESIZE_WINDOW;
+			default:;
+			}
 		default:;
 		}
 	}
