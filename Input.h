@@ -15,7 +15,7 @@ namespace ss
 		~Input() {}
 
 		int init();
-		int init_copy(Input const &_i);
+		void init_copy(Input const &_i);
 		int poll_events();
 
 		SDL_KeyboardEvent	_Keys[SDL_NUM_SCANCODES];

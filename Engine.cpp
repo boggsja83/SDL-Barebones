@@ -35,9 +35,19 @@ int ss::Engine::loop(){
 			break;
 		case RESIZE_WINDOW:
 			SDL_GetWindowSize(_View->win(), &w, &h);
-			_View->set_win_width(w);
-			_View->set_win_height(h);
+			_View->set_win_width((float)w);
+			_View->set_win_height((float)h);
 			_FrameCount = 0;
+			break;
+		case MOUSEWHEEL_UP:
+			_Game->_Rows-=2;
+			_Game->_Cols-=2;
+			std::cout << _Game->_Rows << " " << _Game->_Cols << '\n';
+			break;
+		case MOUSEWHEEL_DOWN:
+			_Game->_Rows+=2;
+			_Game->_Cols+=2;
+			std::cout << _Game->_Rows << " " << _Game->_Cols << '\n';
 			break;
 		default:
 			return r;
@@ -64,6 +74,9 @@ int ss::Engine::loop(){
 		default:
 			return r;
 		}
+
+		SDL_Delay(30);
+		if (_FrameCount % 100 == 0) std::cout << "*00th frame\n";
 	}
 
 	return OK;
@@ -98,7 +111,10 @@ int ss::Engine::render(){
 	SDL_Renderer*	_rd = _View->ren();
 	auto			r = INIT;
 
-	if (_FrameCount == 1) {
+	//if (_FrameCount == 1) {
+		_View->set_borders();
+		_View->set_interface_rects();
+
 		r = SDL_SetRenderDrawColor(_rd, COLOR_BG_R, COLOR_BG_G, COLOR_BG_B, COLOR_BG_A);
 		if (r) return FAIL_SET_DRAW_COLOR;
 
@@ -108,9 +124,12 @@ int ss::Engine::render(){
 		r = _View->draw_interface(_rd);
 		if (r) return r;
 
-		r = _View->draw_grid(_rd, 3, 3);
+		r = _View->draw_grid(_rd, _Game->_Rows, _Game->_Cols);
 		if (r) return r;
-	}
+
+		r = _View->draw_fine_borders(_rd);
+		if (r) return r;
+	//}
 
 	SDL_RenderPresent(_rd);
 

@@ -11,6 +11,7 @@ public:
 	RandomNum(RandomNum const& _rn) {}
 	~RandomNum() {}
 
+	//inclusive of _lo and _hi
 	int random_int(int _lo, int _hi) {
 		std::random_device rd;
 		std::mt19937 gen(rd());

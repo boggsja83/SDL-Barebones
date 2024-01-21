@@ -8,29 +8,41 @@ namespace ss
 {
 	//	GENERAL - settings
 constexpr auto	INIT					= -1;
+constexpr auto	DEFAULT_ROWS			= 51;
+constexpr auto	DEFAULT_COLS			= 51;
 
 	//	VIEW - settings
-constexpr auto	DEFAULT_WIN_WIDTH		= 960;
-constexpr auto	DEFAULT_WIN_HEIGHT		= 720;
+constexpr float	DEFAULT_WIN_WIDTH		= 720;
+constexpr float	DEFAULT_WIN_HEIGHT		= 720;
 
-constexpr auto	COLOR_BG_R				= 102;
-constexpr auto	COLOR_BG_G				= 204;
-constexpr auto	COLOR_BG_B				= 255;
-constexpr auto	COLOR_BG_A				= 255;
+constexpr auto	COLOR_1_R				= 0;
+constexpr auto	COLOR_1_G				= 191;
+constexpr auto	COLOR_1_B				= 255;
+constexpr auto	COLOR_1_A				= 255;
+
+constexpr auto	COLOR_2_R				= 0;
+constexpr auto	COLOR_2_G				= 64;
+constexpr auto	COLOR_2_B				= 255;
+constexpr auto	COLOR_2_A				= 255;
+
+constexpr auto	COLOR_BG_R				= 0;
+constexpr auto	COLOR_BG_G				= 0;
+constexpr auto	COLOR_BG_B				= 0;
+constexpr auto	COLOR_BG_A				= 0;
 
 constexpr auto	COLOR_FRAME_R			= 0;
 constexpr auto	COLOR_FRAME_G			= 0;
 constexpr auto	COLOR_FRAME_B			= 0;
 constexpr auto	COLOR_FRAME_A			= 255;
 
-constexpr auto	COLOR_GRID_R			= 255;
-constexpr auto	COLOR_GRID_G			= 255;
-constexpr auto	COLOR_GRID_B			= 255;
-constexpr auto	COLOR_GRID_A			= 255;
+constexpr auto	COLOR_GRID_R			= 177;
+constexpr auto	COLOR_GRID_G			= 205;
+constexpr auto	COLOR_GRID_B			= 205;
+constexpr auto	COLOR_GRID_A			= 100;
 
 	//	INPUT - settings
-constexpr auto	KEY_COUNT				= 7;	//	default key bindings
-constexpr auto	KEY_ESC					= 41;	//	SDL scan scodes
+constexpr auto	KEY_COUNT				= 7;	//	default key map count
+constexpr auto	KEY_ESC					= 41;	//	SDL scancodes
 constexpr auto	KEY_RET					= 40;
 constexpr auto	KEY_SPACE				= 44;
 constexpr auto	KEY_W					= 26;
@@ -41,11 +53,11 @@ constexpr auto	KEY_D					= 7;
 	//	GAME - settings
 constexpr auto	GAME_TITLE =			"Game Of Liff";
 
-constexpr auto	CONTEXT_COUNT			= 1; //	player
+constexpr auto	CONTEXT_COUNT			= 1;	//	player
 constexpr auto	CONTEXT_ID_PLAYER		= 0;
 
 constexpr auto	CONTEXT_OPERATIONS_COUNT = 6;
-constexpr auto	CURSOR_UP_CONTEXT		= KEY_W;		//	default key mappings
+constexpr auto	CURSOR_UP_CONTEXT		= KEY_W;	//	default key bind count
 constexpr auto	CURSOR_DOWN_CONTEXT		= KEY_S;
 constexpr auto	CURSOR_LEFT_CONTEXT		= KEY_A;
 constexpr auto	CURSOR_RIGHT_CONTEXT	= KEY_D;
@@ -80,7 +92,8 @@ constexpr auto	FAIL_RENDER_CLEAR		= 206;
 	//	400s - INPUT return codes
 constexpr auto	INPUT_NONE				= 401;
 constexpr auto	RESIZE_WINDOW			= 402;
-
+constexpr auto	MOUSEWHEEL_UP			= 403;
+constexpr auto	MOUSEWHEEL_DOWN			= 404;
 
 
 

@@ -10,7 +10,19 @@ int ss::Game::init()
 	_Context[4] = CURSOR_SELECT_CONTEXT;
 	_Context[5] = EXIT_GAME_CONTEXT;
 
+	_Rows = DEFAULT_ROWS;
+	_Cols = DEFAULT_COLS;
+
 	return OK;
+}
+
+void ss::Game::init_copy(Game const& _g) {
+
+	for (auto i = 0; i < CONTEXT_OPERATIONS_COUNT; ++i)
+		this->_Context[i] = _g._Context[i];
+
+	this->_Rows = _g._Rows;
+	this->_Cols = _g._Cols;
 }
 
 //	_c is an array of CONTEXT_OPERATIONS where keyboard button is pressed
