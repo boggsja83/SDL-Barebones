@@ -92,29 +92,39 @@ void ss::View::init_copy(View const& _v) {
 }
 
 int ss::View::draw_interface(SDL_Renderer* _rd) const{
-	RandomNum	rn;
+	//RandomNum	rn;
 	auto		r = INIT;
 	
-	bool temp_switch = true;
-
-	if (temp_switch) {
-		r = SDL_SetRenderDrawColor(_rd, rn.random_int(0, 255), rn.random_int(0, 255), rn.random_int(0, 255), 255);
-		if (r) return FAIL_SET_DRAW_COLOR;
-	}
 	for (int i = 0; i < 9; ++i) {
-		
-		if (!temp_switch) {
-			r = SDL_SetRenderDrawColor(_rd, rn.random_int(0, 255), rn.random_int(0, 255), rn.random_int(0, 255), 255);
-			if (r) return FAIL_SET_DRAW_COLOR;
-		}
-		else if (i == 7) {
-			r = SDL_SetRenderDrawColor(_rd, rn.random_int(0, 255), rn.random_int(0, 255), rn.random_int(0, 255), 255);
-			if (r) return FAIL_SET_DRAW_COLOR;
-		}
+		if (i == 7 || i == 8)		r = SDL_SetRenderDrawColor(_rd, COLOR_2_R, COLOR_2_G, COLOR_2_B, COLOR_2_A);
+		else			r = SDL_SetRenderDrawColor(_rd, COLOR_1_R, COLOR_1_G, COLOR_1_B, COLOR_1_A);
+		if (r)			return FAIL_SET_DRAW_COLOR;
 
 		r = SDL_RenderFillRectF(_rd, &_Interface[i]);
 		if (r) return FAIL_FILL_RECT;
 	}
+
+
+	//bool temp_switch = true;
+
+	//if (temp_switch) {
+	//	r = SDL_SetRenderDrawColor(_rd, rn.random_int(0, 255), rn.random_int(0, 255), rn.random_int(0, 255), 255);
+	//	if (r) return FAIL_SET_DRAW_COLOR;
+	//}
+	//for (int i = 0; i < 9; ++i) {
+	//	
+	//	if (!temp_switch) {
+	//		r = SDL_SetRenderDrawColor(_rd, rn.random_int(0, 255), rn.random_int(0, 255), rn.random_int(0, 255), 255);
+	//		if (r) return FAIL_SET_DRAW_COLOR;
+	//	}
+	//	else if (i == 7) {
+	//		r = SDL_SetRenderDrawColor(_rd, rn.random_int(0, 255), rn.random_int(0, 255), rn.random_int(0, 255), 255);
+	//		if (r) return FAIL_SET_DRAW_COLOR;
+	//	}
+
+	//	r = SDL_RenderFillRectF(_rd, &_Interface[i]);
+	//	if (r) return FAIL_FILL_RECT;
+	//}
 
 	return OK;
 }
@@ -181,7 +191,7 @@ int ss::View::draw_fine_borders(SDL_Renderer* _rd) const {
 	float	w = _Interface[7].w, h = _Interface[7].h;
 	float x = _Interface[7].x, y = _Interface[7].y;
 
-	auto r = SDL_SetRenderDrawColor(_rd, 0, 0, 0, 255);
+	auto r = SDL_SetRenderDrawColor(_rd, 0, 0, 0, 100);
 	if (r) return FAIL_SET_DRAW_COLOR;
 	
 	r = SDL_RenderDrawLineF(_rd, x, y, x + w - 1, y);	//top

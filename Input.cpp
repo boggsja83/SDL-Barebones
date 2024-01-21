@@ -39,6 +39,15 @@ int ss::Input::poll_events(){
             //	}
             //default:;
             //}
+
+        
+        case SDL_MOUSEWHEEL:
+            if (ev.wheel.y > 0) return MOUSEWHEEL_UP;
+            else return MOUSEWHEEL_DOWN;
+
+            break;
+            
+        /****************************************************************/
         case SDL_WINDOWEVENT:
             switch (ev.window.event) {
             case SDL_WINDOWEVENT_SHOWN:
@@ -64,6 +73,7 @@ int ss::Input::poll_events(){
                 SDL_Log("Window %d size changed to %dx%d",
                     ev.window.windowID, ev.window.data1,
                     ev.window.data2);
+                    return RESIZE_WINDOW;
                 break;
             case SDL_WINDOWEVENT_MINIMIZED:
                 SDL_Log("Window %d minimized", ev.window.windowID);
@@ -105,7 +115,7 @@ int ss::Input::poll_events(){
                     ev.window.windowID, ev.window.event);
                 break;
             }
-
+            /*****************************************************************************/
         }
     }
 

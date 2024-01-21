@@ -39,6 +39,16 @@ int ss::Engine::loop(){
 			_View->set_win_height((float)h);
 			_FrameCount = 0;
 			break;
+		case MOUSEWHEEL_UP:
+			_Game->_Rows-=2;
+			_Game->_Cols-=2;
+			std::cout << _Game->_Rows << " " << _Game->_Cols << '\n';
+			break;
+		case MOUSEWHEEL_DOWN:
+			_Game->_Rows+=2;
+			_Game->_Cols+=2;
+			std::cout << _Game->_Rows << " " << _Game->_Cols << '\n';
+			break;
 		default:
 			return r;
 		}
@@ -65,8 +75,8 @@ int ss::Engine::loop(){
 			return r;
 		}
 
-		SDL_Delay(3000);
-
+		SDL_Delay(30);
+		if (_FrameCount % 100 == 0) std::cout << "*00th frame\n";
 	}
 
 	return OK;

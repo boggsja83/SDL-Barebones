@@ -8,27 +8,37 @@ namespace ss
 {
 	//	GENERAL - settings
 constexpr auto	INIT					= -1;
-constexpr auto	DEFAULT_ROWS			= 10;
-constexpr auto	DEFAULT_COLS = 10;
+constexpr auto	DEFAULT_ROWS			= 51;
+constexpr auto	DEFAULT_COLS			= 51;
 
 	//	VIEW - settings
 constexpr float	DEFAULT_WIN_WIDTH		= 720;
 constexpr float	DEFAULT_WIN_HEIGHT		= 720;
 
-constexpr auto	COLOR_BG_R				= 102;
-constexpr auto	COLOR_BG_G				= 204;
-constexpr auto	COLOR_BG_B				= 255;
-constexpr auto	COLOR_BG_A				= 255;
+constexpr auto	COLOR_1_R				= 0;
+constexpr auto	COLOR_1_G				= 191;
+constexpr auto	COLOR_1_B				= 255;
+constexpr auto	COLOR_1_A				= 255;
+
+constexpr auto	COLOR_2_R				= 0;
+constexpr auto	COLOR_2_G				= 64;
+constexpr auto	COLOR_2_B				= 255;
+constexpr auto	COLOR_2_A				= 255;
+
+constexpr auto	COLOR_BG_R				= 0;
+constexpr auto	COLOR_BG_G				= 0;
+constexpr auto	COLOR_BG_B				= 0;
+constexpr auto	COLOR_BG_A				= 0;
 
 constexpr auto	COLOR_FRAME_R			= 0;
 constexpr auto	COLOR_FRAME_G			= 0;
 constexpr auto	COLOR_FRAME_B			= 0;
 constexpr auto	COLOR_FRAME_A			= 255;
 
-constexpr auto	COLOR_GRID_R			= 255;
-constexpr auto	COLOR_GRID_G			= 255;
-constexpr auto	COLOR_GRID_B			= 255;
-constexpr auto	COLOR_GRID_A			= 255;
+constexpr auto	COLOR_GRID_R			= 177;
+constexpr auto	COLOR_GRID_G			= 205;
+constexpr auto	COLOR_GRID_B			= 205;
+constexpr auto	COLOR_GRID_A			= 100;
 
 	//	INPUT - settings
 constexpr auto	KEY_COUNT				= 7;	//	default key map count
@@ -82,7 +92,8 @@ constexpr auto	FAIL_RENDER_CLEAR		= 206;
 	//	400s - INPUT return codes
 constexpr auto	INPUT_NONE				= 401;
 constexpr auto	RESIZE_WINDOW			= 402;
-
+constexpr auto	MOUSEWHEEL_UP			= 403;
+constexpr auto	MOUSEWHEEL_DOWN			= 404;
 
 
 
