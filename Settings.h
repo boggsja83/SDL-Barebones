@@ -8,8 +8,8 @@ namespace ss
 {
 	//	GENERAL - settings
 constexpr auto	INIT					= -1;
-constexpr auto	DEFAULT_ROWS			= 25;
-constexpr auto	DEFAULT_COLS			= 25;
+constexpr auto	DEFAULT_ROWS			= 10;
+constexpr auto	DEFAULT_COLS = 10;
 
 	//	VIEW - settings
 constexpr float	DEFAULT_WIN_WIDTH		= 720;
@@ -31,8 +31,8 @@ constexpr auto	COLOR_GRID_B			= 255;
 constexpr auto	COLOR_GRID_A			= 255;
 
 	//	INPUT - settings
-constexpr auto	KEY_COUNT				= 7;	//	default key bindings
-constexpr auto	KEY_ESC					= 41;	//	SDL scan scodes
+constexpr auto	KEY_COUNT				= 7;	//	default key map count
+constexpr auto	KEY_ESC					= 41;	//	SDL scancodes
 constexpr auto	KEY_RET					= 40;
 constexpr auto	KEY_SPACE				= 44;
 constexpr auto	KEY_W					= 26;
@@ -43,11 +43,11 @@ constexpr auto	KEY_D					= 7;
 	//	GAME - settings
 constexpr auto	GAME_TITLE =			"Game Of Liff";
 
-constexpr auto	CONTEXT_COUNT			= 1; //	player
+constexpr auto	CONTEXT_COUNT			= 1;	//	player
 constexpr auto	CONTEXT_ID_PLAYER		= 0;
 
 constexpr auto	CONTEXT_OPERATIONS_COUNT = 6;
-constexpr auto	CURSOR_UP_CONTEXT		= KEY_W;		//	default key mappings
+constexpr auto	CURSOR_UP_CONTEXT		= KEY_W;	//	default key bind count
 constexpr auto	CURSOR_DOWN_CONTEXT		= KEY_S;
 constexpr auto	CURSOR_LEFT_CONTEXT		= KEY_A;
 constexpr auto	CURSOR_RIGHT_CONTEXT	= KEY_D;

@@ -97,9 +97,6 @@ int ss::View::draw_interface(SDL_Renderer* _rd) const{
 	
 	bool temp_switch = true;
 
-	//set_borders();
-	//set_interface_rects();
-
 	if (temp_switch) {
 		r = SDL_SetRenderDrawColor(_rd, rn.random_int(0, 255), rn.random_int(0, 255), rn.random_int(0, 255), 255);
 		if (r) return FAIL_SET_DRAW_COLOR;
@@ -133,51 +130,46 @@ int ss::View::draw_grid(SDL_Renderer* _rd,int _r, int _c) const {
 
 	if (_r < 0 || _c < 0) return OUT_OF_BOUNDS_PARAMETER;
 
-	std::cout << "iface-8: x="<<x<<" y="<<y<<" w="<<w<<" h="<<h<<"\n";
+	//std::cout << "iface-8: x="<<x<<" y="<<y<<" w="<<w<<" h="<<h<<"\n";
 
 	r = SDL_SetRenderDrawColor(_rd, COLOR_GRID_R, COLOR_GRID_G, COLOR_GRID_B, COLOR_GRID_A);
 	if (r) return FAIL_SET_DRAW_COLOR;
 
 	if (_c == 0) spc = w - 1;
-	//else spc = (w-(_c-1))/ _c;
-	//else spc = w/_c;
 	else spc = w / _c;
 
-	std::cout << "spc=\'" << spc << "\'\n";
+	//std::cout << "spc=\'" << spc << "\'\n";
 
 	for (int i = 1; i < _c; ++i) {
-		t1.x = x + i * spc;// +i + 1;
+		t1.x = x + i * spc - 1;
 		t1.y = y;
 
-		std::cout << "t1.x=" << t1.x << " t1.y=" << t1.y << "\n";
+		//std::cout << "t1.x=" << t1.x << " t1.y=" << t1.y << "\n";
 
-		t2.x = x + i * spc;// +i + 1;
+		t2.x = x + i * spc - 1;
 		t2.y = y + h - 1;
 
-		std::cout << "t2.x=" << t2.x << " t2.y=" << t2.y << "\n";
+		//std::cout << "t2.x=" << t2.x << " t2.y=" << t2.y << "\n";
 
 		r = SDL_RenderDrawLineF(_rd, t1.x, t1.y, t2.x, t2.y);
 		if (r) return FAIL_DRAW_LINE;
 	}
 
-	//if (_r == 0) spc = h-1;
-	//else spc = (h-(_r-1)) / _r;
-
 	if (_r == 0) spc = h - 1;
 	else spc = h / _r;
 
-	std::cout << "spc=\'" <<spc<<"\'\n";
+	//::cout << "spc=\'" <<spc<<"\'\n";
 
 	for (int i = 1; i < _r; ++i) {
 		t1.x = x;
-		t1.y = y + i * spc;// +i + 1;
+		t1.y = y + i * spc - 1;
 
-		std::cout << "t1.x=" << t1.x << " t1.y=" << t1.y << "\n";
+		//std::cout << "t1.x=" << t1.x << " t1.y=" << t1.y << "\n";
 
 		t2.x = x + w - 1;
-		t2.y = y + i * spc;// +i + 1;
+		t2.y = y + i * spc - 1;
 
-		std::cout << "t2.x=" << t2.x << " t2.y=" << t2.y << "\n";
+		//std::cout << "t2.x=" << t2.x << " t2.y=" << t2.y << "\n";
 
 		r = SDL_RenderDrawLineF(_rd, t1.x, t1.y, t2.x, t2.y);
 		if (r) return FAIL_DRAW_LINE;

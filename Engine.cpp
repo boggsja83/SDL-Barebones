@@ -64,6 +64,9 @@ int ss::Engine::loop(){
 		default:
 			return r;
 		}
+
+		SDL_Delay(3000);
+
 	}
 
 	return OK;
@@ -98,7 +101,7 @@ int ss::Engine::render(){
 	SDL_Renderer*	_rd = _View->ren();
 	auto			r = INIT;
 
-	if (_FrameCount == 1) {
+	//if (_FrameCount == 1) {
 		_View->set_borders();
 		_View->set_interface_rects();
 
@@ -116,7 +119,7 @@ int ss::Engine::render(){
 
 		r = _View->draw_fine_borders(_rd);
 		if (r) return r;
-	}
+	//}
 
 	SDL_RenderPresent(_rd);
 
