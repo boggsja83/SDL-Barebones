@@ -2,12 +2,12 @@
 
 void ss::View::set_borders() {
 
-	BORDER_INTERFACE_1 = static_cast<int>(_WinHeight * .05);
-	BORDER_INTERFACE_2 = static_cast<int>(_WinHeight * .9);
-	BORDER_INTERFACE_3 = static_cast<int>((_WinHeight - BORDER_INTERFACE_2) * .12 + BORDER_INTERFACE_2);
-	BORDER_INTERFACE_4 = static_cast<int>(_WinHeight * .988);
-	BORDER_INTERFACE_5 = static_cast<int>(_WinWidth * .025);
-	BORDER_INTERFACE_6 = static_cast<int>(_WinWidth * .975);
+	BORDER_INTERFACE_1 = _WinHeight * .05f;
+	BORDER_INTERFACE_2 = _WinHeight * .9f;
+	BORDER_INTERFACE_3 = (_WinHeight - BORDER_INTERFACE_2) * .13f + BORDER_INTERFACE_2;
+	BORDER_INTERFACE_4 = _WinHeight * .988f;
+	BORDER_INTERFACE_5 = _WinWidth * .025f;
+	BORDER_INTERFACE_6 = _WinWidth * .975f;
 }
 
 void ss::View::set_interface_rects() {
@@ -63,7 +63,7 @@ int ss::View::init(){
 	_WinWidth	= DEFAULT_WIN_WIDTH;
 	_WinHeight	= DEFAULT_WIN_HEIGHT;
 
-	_WinMain = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, _WinWidth, _WinHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);//SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE);
+	_WinMain = SDL_CreateWindow(GAME_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)_WinWidth, (int)_WinHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);//SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE);
 	if (!_WinMain) { return FAIL_CREATE_WIN; }
 
 	_RenMain = SDL_CreateRenderer(_WinMain, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -91,14 +91,14 @@ void ss::View::init_copy(View const& _v) {
 	BORDER_INTERFACE_6 = _v.BORDER_INTERFACE_6;
 }
 
-int ss::View::draw_interface(SDL_Renderer* _rd) {
+int ss::View::draw_interface(SDL_Renderer* _rd) const{
 	RandomNum	rn;
 	auto		r = INIT;
-
+	
 	bool temp_switch = true;
 
-	set_borders();
-	set_interface_rects();
+	//set_borders();
+	//set_interface_rects();
 
 	if (temp_switch) {
 		r = SDL_SetRenderDrawColor(_rd, rn.random_int(0, 255), rn.random_int(0, 255), rn.random_int(0, 255), 255);
@@ -115,7 +115,7 @@ int ss::View::draw_interface(SDL_Renderer* _rd) {
 			if (r) return FAIL_SET_DRAW_COLOR;
 		}
 
-		r = SDL_RenderFillRect(_rd, &_Interface[i]);
+		r = SDL_RenderFillRectF(_rd, &_Interface[i]);
 		if (r) return FAIL_FILL_RECT;
 	}
 
@@ -123,13 +123,13 @@ int ss::View::draw_interface(SDL_Renderer* _rd) {
 }
 
 int ss::View::draw_grid(SDL_Renderer* _rd,int _r, int _c) const {
-	int	w = _Interface[7].w	, h = _Interface[7].h;
-	int x = _Interface[7].x	, y = _Interface[7].y;
-	int spc = 0				, sz = (_r-1)*(_c-1)*2;
+	float w = _Interface[7].w	, h = _Interface[7].h;
+	float x = _Interface[7].x	, y = _Interface[7].y;
+	float spc = 0				, sz = (float)((_r-1)*(_c-1)*2);
 	int r = INIT;
 
-	SDL_Point t1{};
-	SDL_Point t2{};
+	SDL_FPoint t1{};
+	SDL_FPoint t2{};
 
 	if (_r < 0 || _c < 0) return OUT_OF_BOUNDS_PARAMETER;
 
@@ -138,56 +138,82 @@ int ss::View::draw_grid(SDL_Renderer* _rd,int _r, int _c) const {
 	r = SDL_SetRenderDrawColor(_rd, COLOR_GRID_R, COLOR_GRID_G, COLOR_GRID_B, COLOR_GRID_A);
 	if (r) return FAIL_SET_DRAW_COLOR;
 
-	if (_c == 0) spc = w;
-	else spc = (w- (_c-1))/ _c;
+	if (_c == 0) spc = w - 1;
+	//else spc = (w-(_c-1))/ _c;
+	//else spc = w/_c;
+	else spc = w / _c;
 
-	std::cout << "spc=" << spc << "\n";
+	std::cout << "spc=\'" << spc << "\'\n";
 
 	for (int i = 1; i < _c; ++i) {
-		t1.x = x + i * spc + 1;
+		t1.x = x + i * spc;// +i + 1;
 		t1.y = y;
 
 		std::cout << "t1.x=" << t1.x << " t1.y=" << t1.y << "\n";
 
-		t2.x = x + i * spc + 1;
+		t2.x = x + i * spc;// +i + 1;
 		t2.y = y + h - 1;
 
 		std::cout << "t2.x=" << t2.x << " t2.y=" << t2.y << "\n";
 
-		r = SDL_RenderDrawLine(_rd, t1.x, t1.y, t2.x, t2.y);
+		r = SDL_RenderDrawLineF(_rd, t1.x, t1.y, t2.x, t2.y);
 		if (r) return FAIL_DRAW_LINE;
 	}
 
-	if (_r == 0) spc = h;
-	else spc = (h-(_r-1)) / _r;
+	//if (_r == 0) spc = h-1;
+	//else spc = (h-(_r-1)) / _r;
 
-	std::cout << "spc=" <<spc<<'\n';
+	if (_r == 0) spc = h - 1;
+	else spc = h / _r;
+
+	std::cout << "spc=\'" <<spc<<"\'\n";
 
 	for (int i = 1; i < _r; ++i) {
 		t1.x = x;
-		t1.y = y + i * spc + 1;
+		t1.y = y + i * spc;// +i + 1;
 
 		std::cout << "t1.x=" << t1.x << " t1.y=" << t1.y << "\n";
 
 		t2.x = x + w - 1;
-		t2.y = y + i * spc + 1;
+		t2.y = y + i * spc;// +i + 1;
 
 		std::cout << "t2.x=" << t2.x << " t2.y=" << t2.y << "\n";
 
-		r = SDL_RenderDrawLine(_rd, t1.x, t1.y, t2.x, t2.y);
+		r = SDL_RenderDrawLineF(_rd, t1.x, t1.y, t2.x, t2.y);
 		if (r) return FAIL_DRAW_LINE;
 	}
-
-	r = SDL_SetRenderDrawColor(_rd, 0, 0, 0, 255);
-	if (r) return FAIL_SET_DRAW_COLOR;
-	r = SDL_RenderDrawLine(_rd, x, y, x + w - 1, y);	//top
-	r = SDL_RenderDrawLine(_rd, x + w - 1, y, x + w - 1, y + h - 1);	//right
-	r = SDL_RenderDrawLine(_rd, x, y + h - 1, x + w - 1, y + h - 1);	//bottom
-	r = SDL_RenderDrawLine(_rd, x, y, x, y + h - 1);	//left
-
 	return OK;
 }
 
+int ss::View::draw_fine_borders(SDL_Renderer* _rd) const {
+	float	w = _Interface[7].w, h = _Interface[7].h;
+	float x = _Interface[7].x, y = _Interface[7].y;
 
+	auto r = SDL_SetRenderDrawColor(_rd, 0, 0, 0, 255);
+	if (r) return FAIL_SET_DRAW_COLOR;
+	
+	r = SDL_RenderDrawLineF(_rd, x, y, x + w - 1, y);	//top
+	if (r) return FAIL_DRAW_LINE;
+	r = SDL_RenderDrawLineF(_rd, x + w - 1, y, x + w - 1, y + h - 1);	//right
+	if (r) return FAIL_DRAW_LINE;
+	r = SDL_RenderDrawLineF(_rd, x, y + h - 1, x + w - 1, y + h - 1);	//bottom
+	if (r) return FAIL_DRAW_LINE;
+	r = SDL_RenderDrawLineF(_rd, x, y, x, y + h - 1);	//left
+	if (r) return FAIL_DRAW_LINE;
+
+	w = _Interface[8].w, h = _Interface[8].h;
+	x = _Interface[8].x, y = _Interface[8].y;
+
+	r = SDL_RenderDrawLineF(_rd, x, y, x + w - 1, y);	//top
+	if (r) return FAIL_DRAW_LINE;
+	r = SDL_RenderDrawLineF(_rd, x + w - 1, y, x + w - 1, y + h - 1);	//right
+	if (r) return FAIL_DRAW_LINE;
+	r = SDL_RenderDrawLineF(_rd, x, y + h - 1, x + w - 1, y + h - 1);	//bottom
+	if (r) return FAIL_DRAW_LINE;
+	r = SDL_RenderDrawLineF(_rd, x, y, x, y + h - 1);	//left
+	if (r) return FAIL_DRAW_LINE;
+
+	return OK;
+}
 
 

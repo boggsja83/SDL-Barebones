@@ -8,10 +8,12 @@ namespace ss
 {
 	//	GENERAL - settings
 constexpr auto	INIT					= -1;
+constexpr auto	DEFAULT_ROWS			= 25;
+constexpr auto	DEFAULT_COLS			= 25;
 
 	//	VIEW - settings
-constexpr auto	DEFAULT_WIN_WIDTH		= 960;
-constexpr auto	DEFAULT_WIN_HEIGHT		= 720;
+constexpr float	DEFAULT_WIN_WIDTH		= 720;
+constexpr float	DEFAULT_WIN_HEIGHT		= 720;
 
 constexpr auto	COLOR_BG_R				= 102;
 constexpr auto	COLOR_BG_G				= 204;

@@ -10,22 +10,22 @@ namespace ss
 	class View
 	{
 	private:
-		int				_WinWidth,
+		float			_WinWidth,
 						_WinHeight;
 
 		SDL_Window*		_WinMain;
 		SDL_Renderer*	_RenMain;
-		SDL_Rect		_Interface[9];
+		SDL_FRect		_Interface[9];
 
-		int		BORDER_INTERFACE_1;
-		int		BORDER_INTERFACE_2;
-		int		BORDER_INTERFACE_3;
-		int		BORDER_INTERFACE_4;
-		int		BORDER_INTERFACE_5;
-		int		BORDER_INTERFACE_6;
+		float		BORDER_INTERFACE_1;
+		float		BORDER_INTERFACE_2;
+		float		BORDER_INTERFACE_3;
+		float		BORDER_INTERFACE_4;
+		float		BORDER_INTERFACE_5;
+		float		BORDER_INTERFACE_6;
 
-		void	set_borders();
-		void	set_interface_rects();
+		//void	set_borders();
+		//void	set_interface_rects();
 
 	public:
 		View():_WinWidth(0),_WinHeight(0),_WinMain(nullptr),_RenMain(nullptr),_Interface() {
@@ -38,8 +38,7 @@ namespace ss
 		}
 
 		View(View const& _v) { init_copy(_v); }
-		~View()
-		{
+		~View(){
 			SDL_DestroyRenderer(_RenMain);
 			SDL_DestroyWindow(_WinMain);
 		}
@@ -47,15 +46,17 @@ namespace ss
 		inline SDL_Window*		win() { return _WinMain; }
 		inline SDL_Renderer*	ren() { return _RenMain; }
 
-		inline void	set_win_width	(int _w) { _WinWidth = _w; }
-		inline void	set_win_height	(int _h) { _WinHeight = _h; }
+		inline void	set_win_width	(float _w) { _WinWidth = _w; }
+		inline void	set_win_height	(float _h) { _WinHeight = _h; }
 
 		int		init();
 		void	init_copy(View const& _v);
-		int		draw_interface(SDL_Renderer*);
+		int		draw_interface(SDL_Renderer*) const;
 		int		draw_grid(SDL_Renderer*,int,int) const;
+		int		draw_fine_borders(SDL_Renderer*) const;
 		
-
+		void	set_borders();
+		void	set_interface_rects();
 
 	};
 }

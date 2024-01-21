@@ -49,7 +49,6 @@ namespace ss
         inline void     stop() { _On = false; }
         inline void     log(char const *_c) { std::cout << _c; }
 
-        //int            random_int(int, int);
         int             _FrameCount;
 
 	};

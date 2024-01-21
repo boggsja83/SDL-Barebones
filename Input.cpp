@@ -1,20 +1,15 @@
 #include "Input.h"
 
-int ss::Input::init()
-{
+int ss::Input::init(){
 
 	return OK;
 }
 
-int ss::Input::init_copy(Input const& _i)
-{
+void ss::Input::init_copy(Input const& _i){
 	for (int i = 0; i < SDL_NUM_SCANCODES; ++i) { this->_Keys[i] = _i._Keys[i]; }
-
-	return OK;
 }
 
-int ss::Input::poll_events()
-{
+int ss::Input::poll_events(){
 	SDL_Event ev;
 
 	while (SDL_PollEvent(&ev)){
@@ -27,6 +22,12 @@ int ss::Input::poll_events()
 			_Keys[ev.key.keysym.scancode] = ev.key;
 			break;
 		
+		case SDL_MOUSEBUTTONDOWN:
+			if (ev.button.button == SDL_BUTTON_LEFT) {
+				std::cout << "mouse: x="<<ev.button.x<<" y= "<<ev.button.y<<"\n";
+			}
+			break;
+
 		case SDL_QUIT:
 			return EXIT_LOOP;
 		
